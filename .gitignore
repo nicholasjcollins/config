@@ -1,0 +1,9 @@
+nvim/
+NuGet/
+raycast/
+com.corsair/
+stetic/
+xbuild/
+gh/
+envman/
+.DS_Store
