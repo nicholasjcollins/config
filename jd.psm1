@@ -1,12 +1,32 @@
-function G {
+
+function jd {
   param (
+    [string]$searchPath,
     [string]$folderName
   )
-  $rootPath = "C:\Users\ncollins\WSL"
-
   if ($folderName -match '\.') {
-    pushd "$rootPath\*\*\$folderName*"
+    pushd "$searchPath\*\*\$folderName*" -ErrorAction Stop
   } else {
-    pushd "$rootPath\*\$folderName*"
+    pushd "$searchPath\*\$folderName*" -ErrorAction Stop
   }
 }
+
+function G {
+  param (
+    [string]$folderName,
+    [string]$cloudOrLocal = 'c' 
+  )
+  $rootPath = "C:\Users\ncollins\WSL"
+  $cloudPath = "G:\My Drive"
+  if ($cloudOrLocal -eq '.') {
+    jd -searchPath $rootPath -folderName $folderName 
+  }
+  else {
+    try {
+      jd -searchPath $cloudPath -folderName $folderName
+    } catch {
+      jd -searchPath $rootPath -folderName $folderName
+    }
+  }
+}
+
